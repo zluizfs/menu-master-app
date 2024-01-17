@@ -12,9 +12,23 @@ import { useForm } from 'react-hook-form'
 import { Button, InputControlled } from '@menu-master-app/components'
 import { AuthenticationFields } from './types'
 import Link from 'next/link'
+import { AuthService } from '@menu-master-app/services/menu-master/requests/auth'
+import { useAuth } from '@menu-master-app/store'
 
 export default function Auth() {
-	const { control } = useForm<AuthenticationFields>({})
+	const { authenticate } = useAuth()
+
+	const { control, handleSubmit } = useForm<AuthenticationFields>()
+
+	async function onSubmit(data: AuthenticationFields) {
+		await AuthService.authentication({
+			...data
+		}).then((res) => {
+			authenticate({
+				token: res.data.token
+			})
+		})
+	}
 
 	return (
 		<>
@@ -40,7 +54,7 @@ export default function Auth() {
 				/>
 
 				<ButtonWrapper>
-					<Button fullWidth>Entrar</Button>
+					<Button onClick={handleSubmit(onSubmit)} fullWidth>Entrar</Button>
 				</ButtonWrapper>
 			</AuthForm>
 

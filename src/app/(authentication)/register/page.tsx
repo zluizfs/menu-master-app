@@ -12,6 +12,8 @@ import {
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import Link from 'next/link'
+import { apiMenuMaster } from '@menu-master-app/services/menu-master/api'
+import { AuthService } from '@menu-master-app/services/menu-master/requests/auth'
 
 const StepTexts = {
 	0: 'Etapa 1 - Informações Pessoais',
@@ -21,7 +23,7 @@ const StepTexts = {
 export default function Register() {
 	const [step, setStep] = useState(0)
 
-	const { control } = useForm({})
+	const { control, handleSubmit } = useForm({})
 
 	function handleNextStep() {
 		setStep((prev) => prev + 1)
@@ -30,6 +32,7 @@ export default function Register() {
 	function handlePrevStep() {
 		setStep((prev) => prev - 1)
 	}
+
 
 	return (
 		<>
@@ -125,8 +128,13 @@ export default function Register() {
 
 				<ButtonWrapper>
 					<Button type="button" onClick={handleNextStep} fullWidth>
-						{step === 0 ? 'Avançar' : 'Cadastrar'}
+						Avançar
 					</Button>
+					{step === 1 && (
+						<Button variants="outlined" onClick={handlePrevStep} fullWidth>
+              Cadastrar
+						</Button>
+					)}
 					{step === 1 && (
 						<Button variants="outlined" onClick={handlePrevStep} fullWidth>
               Voltar
