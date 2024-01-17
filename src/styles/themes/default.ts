@@ -48,7 +48,6 @@ export const DefaultTheme = {
 	},
 	shadows: {
 		shadow_base: '0px 0.42px 3px rgba(0, 0, 0, 0.4)',
-		shadow_info: '0px 0.42px 3px rgba(38, 133, 202, 0.6)',
 	},
 	fontSizes: {
 		h1: '5rem', // 80px
@@ -64,15 +63,8 @@ export const DefaultTheme = {
 		p5: '0.75rem', // 12px
 	},
 	fonts: {
-		nunitoLight: 'Nunito Light',
-		nunitoNormal: 'Nunito Font',
-		nunitoRegular: 'Nunito Regular',
-		nunitoSemibold: 'Nunito SemiBold',
-		nunitoBold: 'Nunito Bold',
-		openSansLight: 'Open Sans Light',
-		openSansNormal: 'Open Sans Font',
-		openSansRegular: 'Open Sans Regular',
-		openSansSemibold: 'Open Sans SemiBold',
+		philosopherBold: 'Philosopher',
+		ralewayVariable: 'Raleway',
 	},
 	sizes: {
 		// -> height
