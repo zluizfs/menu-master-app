@@ -4,22 +4,37 @@ import {
 	FormWrapper,
 	ImageOverlay,
 	ImageWrapper,
+	LoginImage,
 	LoginWrapper,
 } from './styles'
+import { cookies } from 'next/headers'
+import { AuthEnum } from '@menu-master-app/@types'
+import { redirect } from 'next/navigation'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+	title: {
+		template: '%s | Menu Master',
+		default: 'Menu Master'
+	}
+}
 
 export default function AuthLayout({
 	children,
 }: {
   children: React.ReactNode;
 }) {
+	const tokenCookie = !!cookies().get(AuthEnum.AUTH_COOKIE_NAME)
+
+	if (tokenCookie) redirect('/dashboard')
+
 	return (
 		<LoginWrapper>
 			<ImageWrapper>
 				<ImageOverlay />
-				<Image
+				<LoginImage
 					src="/image/background-image.png"
 					alt="Mesa de cozinha com pizza, macarrão, saladas e azeite"
-					objectFit="cover"
 					fill
 				/>
 			</ImageWrapper>

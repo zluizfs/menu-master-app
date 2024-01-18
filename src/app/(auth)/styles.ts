@@ -1,6 +1,7 @@
 'use client'
 
 import { media } from '@menu-master-app/styles/media-query'
+import Image from 'next/image'
 import styled from 'styled-components'
 
 export const LoginWrapper = styled.div`
@@ -32,6 +33,10 @@ export const ImageOverlay = styled.div`
   z-index: 2;
 
   background: ${({ theme }) => theme.colors.base_40};
+`
+
+export const LoginImage = styled(Image)`
+  object-fit: cover;
 `
 
 export const FormWrapper = styled.div`
@@ -97,4 +102,3 @@ export const RegisterText = styled.p`
     color: ${({ theme }) => theme.colors.primary_100};
   }
 `
-

@@ -5,7 +5,7 @@ export type InputControlledProps<TControl extends FieldValues> = Omit<
   ControllerProps<TControl>,
   'render' | 'control' | 'name'
 > &
-  Omit<InputUncontrolledProps, 'onBlur' | 'value'> & {
+  Omit<InputUncontrolledProps, 'value'> & {
     control?: Control<TControl>;
     name: Path<TControl>;
   };

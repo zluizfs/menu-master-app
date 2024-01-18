@@ -49,19 +49,6 @@ export const DefaultTheme = {
 	shadows: {
 		shadow_base: '0px 0.42px 3px rgba(0, 0, 0, 0.4)',
 	},
-	fontSizes: {
-		h1: '5rem', // 80px
-		h2: '3.5rem', // 56px
-		h3: '2.75rem', // 44px
-		h4: '2.25rem', // 36px
-		h5: '2rem', // 32px
-		h6: '1.75rem', // 28px
-		p1: '1.5rem', // 24px
-		p2: '1.25rem', // 20px
-		p3: '1rem', // 16px
-		p4: '0.875rem', // 14px
-		p5: '0.75rem', // 12px
-	},
 	fonts: {
 		philosopherBold: 'Philosopher',
 		ralewayVariable: 'Raleway',

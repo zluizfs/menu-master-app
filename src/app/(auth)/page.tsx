@@ -14,20 +14,42 @@ import { AuthenticationFields } from './types'
 import Link from 'next/link'
 import { AuthService } from '@menu-master-app/services/menu-master/requests/auth'
 import { useAuth } from '@menu-master-app/store'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { userAuthValidation } from '@menu-master-app/configs/yup/auth'
 
 export default function Auth() {
+	const { push } = useRouter()
+
 	const { authenticate } = useAuth()
 
-	const { control, handleSubmit } = useForm<AuthenticationFields>()
+	const {
+		control,
+		formState: { errors },
+		handleSubmit,
+	} = useForm<AuthenticationFields>({
+		resolver: yupResolver<AuthenticationFields>(userAuthValidation),
+	})
+
+	const [isSignIn, setIsSignIn] = useState(false)
 
 	async function onSubmit(data: AuthenticationFields) {
+		setIsSignIn(true)
+
 		await AuthService.authentication({
-			...data
-		}).then((res) => {
+			...data,
+		}).then(({ data }) => {
 			authenticate({
-				token: res.data.token
+				name: data.user.name,
+				addresses: data.user.addresses,
+				token: data.token,
 			})
+
+			push('/dashboard')
 		})
+
+		setIsSignIn(false)
 	}
 
 	return (
@@ -44,17 +66,26 @@ export default function Auth() {
 					name="email"
 					control={control}
 					placeholder="E-mail"
-					fullWidth
+					errorMessage={errors.email?.message}
+					$fullWidth
 				/>
 				<InputControlled
 					name="password"
 					control={control}
 					placeholder="Senha"
-					fullWidth
+					type="password"
+					errorMessage={errors.password?.message}
+					$fullWidth
 				/>
 
 				<ButtonWrapper>
-					<Button onClick={handleSubmit(onSubmit)} fullWidth>Entrar</Button>
+					<Button
+						onClick={handleSubmit(onSubmit)}
+						$fullWidth
+						disabled={isSignIn}
+					>
+						{isSignIn ? 'Entrando...' : 'Entrar'}
+					</Button>
 				</ButtonWrapper>
 			</AuthForm>
 

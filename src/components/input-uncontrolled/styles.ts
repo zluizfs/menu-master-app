@@ -18,7 +18,7 @@ export const Wrapper = styled.div<WrapperStylesProps>`
   justify-content: center;
   flex-direction: column;
 
-  ${({ fullWidth }) => fullWidth && WrapperVariants.fullWidth}
+  ${({ $fullWidth }) => $fullWidth && WrapperVariants.fullWidth}
 `
 
 export const TextInputVariants = {
@@ -67,9 +67,10 @@ export const TextInput = styled.input<TextInputStylesProps>`
     color: ${({ theme }) => theme.colors.base_40};
   }
 
-  ${({ error }) => error && TextInputVariants.error}
-  ${({ fullWidth }) => fullWidth && WrapperVariants.fullWidth}
+  ${({ $error }) => $error && TextInputVariants.error}
+  ${({ $fullWidth }) => $fullWidth && WrapperVariants.fullWidth}
 `
+
 export const ErrorMessage = styled.span`
   font-family: ${({ theme }) => theme.fonts.ralewayVariable};
   font-size: 0.8rem;
